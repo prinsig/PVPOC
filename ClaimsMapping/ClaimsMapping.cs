@@ -47,15 +47,15 @@ namespace ClaimsMapping
         {
             var tokenTextLower = token.Text.Content.ToLower();
 
-            if (_damagedVerbsLower.Any(s => s.StartsWith(tokenTextLower)))
+            if (_damagedVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Damaged;
             }
-            else if (_lostVerbsLower.Any(s => s.StartsWith(tokenTextLower)))
+            else if (_lostVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Lost;
             }
-            else if (_stolenVerbsLower.Any(s => s.StartsWith(tokenTextLower)))
+            else if (_stolenVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Stolen;
             }
@@ -66,7 +66,8 @@ namespace ClaimsMapping
             "damage",
             "crack",
             "smash",
-            "destroy"
+            "destroy",
+            "broke"
         };
 
         private readonly List<string> _lostVerbsLower = new List<string>()
