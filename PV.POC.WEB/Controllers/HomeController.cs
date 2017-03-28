@@ -36,8 +36,8 @@ namespace PV.POC.WEB.Controllers
         {
             var obj = new PVpoc.Controllers.NaturalLanguageController();
             model.Claim = obj.GetAnnotatedText(model.InputText);
-
-            return View("Index",new IndexModel());
+            model.IsHidden = false;
+            return View("Index", model);
         }
     }
 }
