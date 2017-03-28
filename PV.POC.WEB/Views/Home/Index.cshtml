@@ -1,0 +1,19 @@
+﻿@model PV.POC.WEB.Models.IndexModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.BeginForm("SubmitText","Home")
+<div class="row">
+        <div>
+            <img src="~/Content/raci/RAC-site-logo.png" >
+        </div>
+        <br/>
+    </div>
+
+    <div class="row" style="background-image: url('../../content/raci/busselton jpg.jpg')">
+
+        @Html.TextAreaFor(model => model.InputText, new { @class = "required", style = " rows=10, columns=40" })
+
+    </div>
