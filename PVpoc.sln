@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVpoc", "PVpoc\PVpoc.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVpoc.Tests", "PVpoc.Tests\PVpoc.Tests.csproj", "{2A7F8F40-C128-458E-83AE-A3D8FDF27405}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimsMapping", "ClaimsMapping\ClaimsMapping.csproj", "{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimsMapping.Tests", "ClaimsMapping.Tests\ClaimsMapping.Tests.csproj", "{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2A7F8F40-C128-458E-83AE-A3D8FDF27405}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A7F8F40-C128-458E-83AE-A3D8FDF27405}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A7F8F40-C128-458E-83AE-A3D8FDF27405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
