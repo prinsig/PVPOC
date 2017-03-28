@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PVpoc.GoogleAPI;
-using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
+using System.Linq;
 
 namespace PVpoc.Tests.GoogleAPI
 {
@@ -26,8 +25,13 @@ namespace PVpoc.Tests.GoogleAPI
         [TestMethod]
         public void AnalyzeEverything_ResponseContainsSentiment_ShouldBeSuccess()
         {
-            Console.WriteLine(result.ToString());
             Assert.IsTrue(result.ToString().Contains("sentiment"));
+        }
+
+        [TestMethod]
+        public void AnalyzeEverything_ResponseContainsPhoneEntity_Success()
+        {
+            Assert.IsTrue(result.Entities.Any(e => e.Name == "phone"));
         }
     }
 }
