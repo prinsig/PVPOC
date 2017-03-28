@@ -141,6 +141,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClaimsMapping\ClaimsMapping.csproj">
+      <Project>{25f3a06a-ee5d-4f7c-b50e-5c21bcb61a76}</Project>
+      <Name>ClaimsMapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PVpoc\PVpoc.csproj">
       <Project>{015B95C2-3F32-4F98-898F-B94B3F06A620}</Project>
       <Name>PVpoc</Name>

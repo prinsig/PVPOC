@@ -87,6 +87,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -288,6 +289,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClaimsMapping\ClaimsMapping.csproj">
+      <Project>{25f3a06a-ee5d-4f7c-b50e-5c21bcb61a76}</Project>
+      <Name>ClaimsMapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PVpoc\PVpoc.csproj">
+      <Project>{015b95c2-3f32-4f98-898f-b94b3f06a620}</Project>
+      <Name>PVpoc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

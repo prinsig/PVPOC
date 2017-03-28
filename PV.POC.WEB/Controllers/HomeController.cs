@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PV.POC.WEB.Models;
+using ClaimsMapping;
 
 namespace PV.POC.WEB.Controllers
 {
@@ -31,10 +32,10 @@ namespace PV.POC.WEB.Controllers
 
 
         [HttpPost]
-        public ActionResult SubmitText()
+        public ActionResult SubmitText(IndexModel model)
         {
-
-            // do some stuff here to get the things.
+            var obj = new PVpoc.Controllers.NaturalLanguageController();
+            model.Claim = obj.GetAnnotatedText(model.InputText);
 
             return View("Index",new IndexModel());
         }
