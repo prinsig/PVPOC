@@ -4,7 +4,7 @@
     {
         public string InputText { get; set; }
 
-        public bool Hide { get; set; }
+        public bool IsHidden { get; set; } = true;
 
         public Claim Claim { get; set; }
         
