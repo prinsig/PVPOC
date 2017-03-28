@@ -7,8 +7,6 @@
 @Html.BeginForm("SubmitText","Home")
 
 
-
-
 <div class="row">
         <div>
             <img src="~/Content/raci/RAC-site-logo.png" >
@@ -25,7 +23,6 @@
             <button type="submit" class="button">
                 <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
                 <span class="item-text">Make a claim</span>
-                <span class="item-text-short">Claim</span>
             </button>
         </div>
 
@@ -38,10 +35,13 @@
     .statement-container {
         text-align: center;
         vertical-align: middle;
+        padding-top: 35px;
+        
     }
 
     .button {
         font-size: 12px;
+        font-weight: 800;
         line-height: 1.5;
         margin-bottom: 1px;
         text-align: left;
@@ -55,5 +55,6 @@
     }
     textarea {
         max-width: none;
+        margin-bottom: 25px;
     }
 </style>
