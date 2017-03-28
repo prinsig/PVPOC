@@ -26,7 +26,8 @@ namespace ClaimsMapping.Tests
                         Type = "LOCATION"
                     }
                 },
-                Tokens = new List<Token>()
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
             };
             
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -52,7 +53,8 @@ namespace ClaimsMapping.Tests
                             Tag = "VERB"
                         }
                     }
-                }
+                },
+                Sentences = new List<Sentence>()
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -78,7 +80,8 @@ namespace ClaimsMapping.Tests
                             Tag = "VERB"
                         }
                     }
-                }
+                },
+                Sentences = new List<Sentence>()
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -104,7 +107,8 @@ namespace ClaimsMapping.Tests
                             Tag = "VERB"
                         }
                     }
-                }
+                },
+                Sentences = new List<Sentence>()
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -133,7 +137,8 @@ namespace ClaimsMapping.Tests
                             Tag = "NOUN"
                         }
                     }
-                }
+                },
+                Sentences = new List<Sentence>()
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -162,7 +167,8 @@ namespace ClaimsMapping.Tests
                             Tag = "NOUN"
                         }
                     }
-                }
+                },
+                Sentences = new List<Sentence>()
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
@@ -170,6 +176,39 @@ namespace ClaimsMapping.Tests
             Assert.IsNull(claim.DamageLocation);
             Assert.IsNull(claim.TypeOfDamage);
             Assert.AreEqual(DateTime.Today.AddDays(-1), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_LastWednesday()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "Last Wednesday I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+
+            //Look for last Wednesday
+            var comparisonDate = DateTime.Today.AddDays(-1);
+            while (comparisonDate.DayOfWeek != DayOfWeek.Wednesday)
+            {
+                comparisonDate = comparisonDate.AddDays(-1);
+            }
+            Assert.AreEqual(comparisonDate, claim.DateOfDamage);
         }
     }
 }
