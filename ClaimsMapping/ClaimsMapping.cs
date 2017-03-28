@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Google.Apis.CloudNaturalLanguage.v1.Data;
+using Google.Cloud.Language.V1;
 
 namespace ClaimsMapping
 {
@@ -25,12 +25,12 @@ namespace ClaimsMapping
 
             foreach (var entity in entities)
             {
-                if (entity.Type == "CONSUMER_GOOD")
+                if (entity.Type == Entity.Types.Type.ConsumerGood)
                 {
                     claim.DamagedItem = entity.Name;
                 }
 
-                if (entity.Type == "LOCATION")
+                if (entity.Type == Entity.Types.Type.Location)
                 {
                     claim.DamageLocation = entity.Name;
                 }
@@ -41,12 +41,12 @@ namespace ClaimsMapping
 
         private void PopulateFromTokens(AnnotateTextResponse response, Claim claim)
         {
-            foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == "VERB"))
+            foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == PartOfSpeech.Types.Tag.Verb))
             {
                 AnalyseVerbForDamage(token, claim);
             }
 
-            foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == "NOUN"))
+            foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == PartOfSpeech.Types.Tag.Noun))
             {
                 AnalyseNounForTime(token, claim);
             }
