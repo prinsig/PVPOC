@@ -290,7 +290,7 @@ namespace ClaimsMapping.Tests
         }
 
         [Test]
-        public void TestDateMapping_specificWithSlashesAndSingleDigitDayAndMonth()
+        public void TestDateMapping_specificWithSlashesAndSingleDigitDayAndMonthDoubleDigitYear()
         {
             var atr = new AnnotateTextResponse
             {
@@ -302,7 +302,7 @@ namespace ClaimsMapping.Tests
                     {
                         Text = new TextSpan()
                         {
-                            Content = "On 6/4/2016 I went to the shops"
+                            Content = "On 6/4/16 I went to the shops"
                         }
                     }
                 }
@@ -342,7 +342,7 @@ namespace ClaimsMapping.Tests
         }
 
         [Test]
-        public void TestDateMapping_specificWithBackslashesAndSingleDigitDayAndMonth()
+        public void TestDateMapping_specificWithBackslashesAndSingleDigitDayAndMonthDoubleDigitYear()
         {
             var atr = new AnnotateTextResponse
             {
@@ -354,7 +354,7 @@ namespace ClaimsMapping.Tests
                     {
                         Text = new TextSpan()
                         {
-                            Content = "On 6\\4\\2016 I went to the shops"
+                            Content = "On 6\\4\\16 I went to the shops"
                         }
                     }
                 }
@@ -366,5 +366,68 @@ namespace ClaimsMapping.Tests
             Assert.IsNull(claim.TypeOfDamage);
             Assert.AreEqual(new DateTime(2016, 4, 6), claim.DateOfDamage);
         }
+
+        [Test]
+        public void TestDateMapping_dayOfMonth()
+        {
+            for (var i = 1; i < 12; i++)
+            {
+                var atr = new AnnotateTextResponse
+                {
+                    Entities = new List<Entity>(),
+                    Tokens = new List<Token>(),
+                    Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On the 6th of " + getMonth(i) + " I went to the shops"
+                        }
+                    }
+                }
+                };
+
+                var claim = new ClaimPopulator().PopulateClaim(atr);
+                Assert.IsNull(claim.DamagedItem);
+                Assert.IsNull(claim.DamageLocation);
+                Assert.IsNull(claim.TypeOfDamage);
+                Assert.AreEqual(new DateTime(DateTime.Now.Year, i, 6), claim.DateOfDamage);
+            }
+        }
+
+        private string getMonth(int numberOfMonth)
+        {
+            switch (numberOfMonth)
+            {
+                case 1:
+                    return "January";
+                case 2:
+                    return "feb";
+                case 3:
+                    return "march";
+                case 4:
+                    return "Apr";
+                case 5:
+                    return "may";
+                case 6:
+                    return "June";
+                case 7:
+                    return "july";
+                case 8:
+                    return "aug";
+                case 9:
+                    return "Sep";
+                case 10:
+                    return "oct";
+                case 11:
+                    return "November";
+                case 12:
+                    return "december";
+                default:
+                    return "WRONG";
+            }
+        }
+
     }
 }
