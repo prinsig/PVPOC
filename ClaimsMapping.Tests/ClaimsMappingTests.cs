@@ -2,7 +2,7 @@
 using Google.Cloud.Language.V1;
 using NUnit.Framework;
 
-namespace ClaimsMapping.Tests
+namespace PV.POC.Mapper.Tests
 {
     [TestFixture]
     public class ClaimsMappingTests

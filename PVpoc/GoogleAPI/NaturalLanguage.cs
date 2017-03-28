@@ -1,7 +1,6 @@
 ﻿using Google.Cloud.Language.V1;
-using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 
-namespace PVpoc.GoogleAPI
+namespace PV.POC.WEB.API.GoogleAPI
 {
     public static class NaturalLanguage
     {
@@ -13,7 +12,7 @@ namespace PVpoc.GoogleAPI
         public static AnalyzeEntitiesResponse AnalyzeEntitiesFromText(string text)
         {           
             var client = LanguageServiceClient.Create();
-
+           
             if(client != null)
             {
                 return client.AnalyzeEntities(new Document()
@@ -42,7 +41,7 @@ namespace PVpoc.GoogleAPI
                     Content = text,
                     Type = Document.Types.Type.PlainText
                 },
-                new Features()
+                new AnnotateTextRequest.Types.Features()
                 {
                     ExtractSyntax = true,
                     ExtractDocumentSentiment = true,

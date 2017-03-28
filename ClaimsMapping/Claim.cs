@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClaimsMapping
+namespace PV.POC.Mapper
 {
     public class Claim
     {

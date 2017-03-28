@@ -1,9 +1,8 @@
 ﻿using System.Web.Http;
-using PVpoc.GoogleAPI;
-using ClaimsMapping;
-using Google.Cloud.Language.V1;
+using PV.POC.Mapper;
+using PV.POC.WEB.API.GoogleAPI;
 
-namespace PVpoc.Controllers
+namespace PV.POC.WEB.API.Controllers
 {
     public class NaturalLanguageController: ApiController
     {

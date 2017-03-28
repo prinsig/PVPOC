@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}</ProjectGuid>
+    <ProjectGuid>{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClaimsMapping.Tests</RootNamespace>
-    <AssemblyName>ClaimsMapping.Tests</AssemblyName>
+    <RootNamespace>PV.POC.Mapper</RootNamespace>
+    <AssemblyName>PV.POC.Mapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -88,10 +88,6 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Interactive.Async, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
@@ -127,18 +123,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClaimsMappingTests.cs" />
+    <Compile Include="Claim.cs" />
+    <Compile Include="ClaimsMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClaimsMapping\ClaimsMapping.csproj">
-      <Project>{25f3a06a-ee5d-4f7c-b50e-5c21bcb61a76}</Project>
-      <Name>ClaimsMapping</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" />

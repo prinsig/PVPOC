@@ -1,11 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PVpoc.Controllers;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PV.POC.Mapper;
+using PV.POC.WEB.API.Controllers;
 
-namespace PVpoc.Tests.Controllers
+namespace PV.POC.WEB.API.Tests.Controllers
 {
 
     [TestClass]
@@ -13,7 +10,7 @@ namespace PVpoc.Tests.Controllers
     {
 
         private readonly string inputText = "I had my phone stolen while playing with my dog at the park last night.";
-        private ClaimsMapping.Claim result;
+        private Claim result;
         private NaturalLanguageController controller;
 
         [TestInitialize]

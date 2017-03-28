@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PV.POC.WEB.API.Controllers;
 using PV.POC.WEB.Models;
-using ClaimsMapping;
+
 
 namespace PV.POC.WEB.Controllers
 {
@@ -34,10 +35,10 @@ namespace PV.POC.WEB.Controllers
         [HttpPost]
         public ActionResult SubmitText(IndexModel model)
         {
-            var obj = new PVpoc.Controllers.NaturalLanguageController();
+            var obj = new NaturalLanguageController();
             model.Claim = obj.GetAnnotatedText(model.InputText);
-
-            return View("Index",new IndexModel());
+            model.IsHidden = false;
+            return View("Index", model);
         }
     }
 }

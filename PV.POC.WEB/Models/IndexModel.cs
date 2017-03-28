@@ -6,7 +6,7 @@
 
         public bool IsHidden { get; set; } = true;
 
-        public ClaimsMapping.Claim Claim { get; set; }
+        public Mapper.Claim Claim { get; set; }
         
     }
 }

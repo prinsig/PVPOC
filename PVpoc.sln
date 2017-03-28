@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVpoc", "PVpoc\PVpoc.csproj", "{015B95C2-3F32-4F98-898F-B94B3F06A620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PV.POC.WEB.API", "PVpoc\PV.POC.WEB.API.csproj", "{015B95C2-3F32-4F98-898F-B94B3F06A620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVpoc.Tests", "PVpoc.Tests\PVpoc.Tests.csproj", "{2A7F8F40-C128-458E-83AE-A3D8FDF27405}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PV.POC.WEB.API.Tests", "PVpoc.Tests\PV.POC.WEB.API.Tests.csproj", "{2A7F8F40-C128-458E-83AE-A3D8FDF27405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimsMapping", "ClaimsMapping\ClaimsMapping.csproj", "{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PV.POC.Mapper", "ClaimsMapping\PV.POC.Mapper.csproj", "{25F3A06A-EE5D-4F7C-B50E-5C21BCB61A76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimsMapping.Tests", "ClaimsMapping.Tests\ClaimsMapping.Tests.csproj", "{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PV.POC.Mapper.Tests", "ClaimsMapping.Tests\PV.POC.Mapper.Tests.csproj", "{315DFAB7-C6D5-4B74-A9D5-19753D4D8A68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PV.POC.WEB", "PV.POC.WEB\PV.POC.WEB.csproj", "{213A13D0-F1E1-40FB-81B3-234FAC957BF9}"
 EndProject

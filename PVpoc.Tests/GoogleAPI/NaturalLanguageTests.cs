@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PVpoc.GoogleAPI;
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PV.POC.WEB.API.GoogleAPI;
 
-namespace PVpoc.Tests.GoogleAPI
+namespace PV.POC.WEB.API.Tests.GoogleAPI
 {
     [TestClass]
     public class NaturalLanguageTests
