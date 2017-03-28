@@ -24,9 +24,10 @@ namespace PVpoc.Tests.GoogleAPI
         }
 
         [TestMethod]
-        public void AnalyzeEverything_ResponseContainsEntities_ShouldBeSuccess()
+        public void AnalyzeEverything_ResponseContainsSentiment_ShouldBeSuccess()
         {
-            Assert.IsTrue(result.ToString().Contains("Entities"));
+            Console.WriteLine(result.ToString());
+            Assert.IsTrue(result.ToString().Contains("sentiment"));
         }
     }
 }
