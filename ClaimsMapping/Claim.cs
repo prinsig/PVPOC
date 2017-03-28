@@ -16,7 +16,7 @@ namespace ClaimsMapping
         }
 
         public string DamagedItem { get; set; }
-        public DamageType TypeOfDamage { get; set; }
+        public DamageType? TypeOfDamage { get; set; }
         public string DamageLocation { get; set; }
         public string DateOfDamage { get; set; }
         public string PolicyNumber { get; set; }
