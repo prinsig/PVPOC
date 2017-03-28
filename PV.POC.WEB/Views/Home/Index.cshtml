@@ -4,11 +4,13 @@
     ViewBag.Title = "Home Page";
 }
 
-@Html.BeginForm("SubmitText", "Home"){ 
+@using (Html.BeginForm("SubmitText", "Home"))
+{ 
 
 
 <div class="row">
-        <div>
+    
+        <div class="logo-rac">
             <img src="~/Content/raci/RAC-site-logo.png" >
         </div>
         <br/>
@@ -17,7 +19,7 @@
     <div class="row statement-container" style="background-image: url('../../content/raci/busselton jpg.jpg'); min-height: 350px;">
 
         <div class="col-md-12">
-            @Html.TextAreaFor(model => model.InputText, new { @class = "required textinput",rows="10",cols="100"})
+            @Html.TextAreaFor(model => model.InputText, new { @class = "required textinput", rows = "10", cols = "100" })
         </div>
         <div class="col-md-12">
             <button type="submit" class="button">
@@ -30,6 +32,55 @@
         </div>
 
 }
+
+@if (!Model.Hide)
+{
+
+    <hr />
+    <div class="row results-container">
+        <div class="row result-header">
+            <h2> Claim: 1348934 </h2>
+        </div>
+    <br/>
+        <div class="question-container row">
+            <div class="question col-sm-3">
+                Event date
+            </div>
+            <div class="answer col-sm-3">
+                @Html.TextBoxFor(o => o.Claim.DateOfDamage, new {@class = "form-control"})
+            </div>
+        </div>
+
+        <div class="question-container row">
+            <div class="question col-sm-3">
+                Event location
+            </div>
+            <div class="answer col-sm-3">
+                @Html.TextBoxFor(o => o.Claim.DamageLocation, new {@class = "form-control"})
+            </div>
+        </div>
+
+        <div class="question-container row">
+            <div class="question col-sm-3">
+                Item in question
+            </div>
+            <div class="answer col-sm-3">
+                @Html.TextBoxFor(o => o.Claim.DamagedItem, new {@class = "form-control"})
+            </div>
+        </div>
+
+        <div class="question-container row">
+            <div class="question col-sm-3">
+                Type of damage
+            </div>
+            <div class="answer col-sm-3">
+                @Html.TextBoxFor(o => o.Claim.TypeOfDamage, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+}
+
+
 <style>
 
     .statement-container {
@@ -57,4 +108,36 @@
         max-width: none;
         margin-bottom: 25px;
     }
+
+    .results-container div {
+        line-height: 30px;
+        padding: 3px;
+    }
+
+    .question {
+
+        font-weight: bold;
+        
+
+    }
+
+    .question-container {
+        border-bottom: 1px solid lightgray;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .question:after {
+        content: ":";
+    }
+
+    .logo-rac {
+        text-align: center;
+    }
+
+    .result-header {
+        border-bottom: 1px solid lightgray;
+    }
+
 </style>
+

@@ -11,7 +11,8 @@ namespace PV.POC.WEB.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+
+            return View(new IndexModel());
         }
 
         public ActionResult About()
