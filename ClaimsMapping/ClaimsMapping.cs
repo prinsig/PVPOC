@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Google.Apis.CloudNaturalLanguage.v1.Data;
 
@@ -41,23 +42,42 @@ namespace ClaimsMapping
             {
                 AnalyseVerbForDamage(token, claim);
             }
+
+            foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == "NOUN"))
+            {
+                AnalyseNounForTime(token, claim);
+            }
         }
 
         private void AnalyseVerbForDamage(Token token, Claim claim)
         {
-            var tokenTextLower = token.Text.Content.ToLower();
+            var tokenBaseWord = token.Lemma;
 
-            if (_damagedVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
+            if (_damagedVerbsLower.Any(s => tokenBaseWord.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Damaged;
             }
-            else if (_lostVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
+            else if (_lostVerbsLower.Any(s => tokenBaseWord.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Lost;
             }
-            else if (_stolenVerbsLower.Any(s => tokenTextLower.StartsWith(s)))
+            else if (_stolenVerbsLower.Any(s => tokenBaseWord.StartsWith(s)))
             {
                 claim.TypeOfDamage = Claim.DamageType.Stolen;
+            }
+        }
+
+        private static void AnalyseNounForTime(Token token, Claim claim)
+        {
+            var tokenTextLower = token.Text.Content.ToLower();
+
+            if (tokenTextLower == "today")
+            {
+                claim.DateOfDamage = DateTime.Today;
+            }
+            else if (tokenTextLower == "yesterday")
+            {
+                claim.DateOfDamage = DateTime.Today.AddDays(-1);
             }
         }
 
@@ -67,22 +87,19 @@ namespace ClaimsMapping
             "crack",
             "smash",
             "destroy",
-            "broke"
+            "break"
         };
 
         private readonly List<string> _lostVerbsLower = new List<string>()
         {
             "lose",
-            "lost",
             "gone"
         };
 
         private readonly List<string> _stolenVerbsLower = new List<string>()
         {
             "take",
-            "stole",
-            "took",
-            "stole",
+            "steal",
             "nick",
             "pinch"
         };

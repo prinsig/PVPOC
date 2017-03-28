@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Google.Apis.CloudNaturalLanguage.v1.Data;
 using NUnit.Framework;
 
@@ -32,6 +33,7 @@ namespace ClaimsMapping.Tests
             Assert.AreEqual("iPhone", claim.DamagedItem);
             Assert.AreEqual("beach", claim.DamageLocation);
             Assert.IsNull(claim.TypeOfDamage);
+            Assert.IsNull(claim.DateOfDamage);
         }
 
         [Test]
@@ -39,27 +41,12 @@ namespace ClaimsMapping.Tests
         {
             var atr = new AnnotateTextResponse
             {
-                Entities = new List<Entity>()
-                {
-                    new Entity()
-                    {
-                        Name = "iPhone",
-                        Type = "CONSUMER_GOOD"
-                    },
-                    new Entity()
-                    {
-                        Name = "beach",
-                        Type = "LOCATION"
-                    }
-                },
+                Entities = new List<Entity>(),
                 Tokens = new List<Token>()
                 {
                     new Token()
                     {
-                        Text = new TextSpan()
-                        {
-                            Content = "broken",
-                        },
+                        Lemma = "break",
                         PartOfSpeech = new PartOfSpeech()
                         {
                             Tag = "VERB"
@@ -69,9 +56,10 @@ namespace ClaimsMapping.Tests
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
-            Assert.AreEqual("iPhone", claim.DamagedItem);
-            Assert.AreEqual("beach", claim.DamageLocation);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
             Assert.AreEqual(Claim.DamageType.Damaged, claim.TypeOfDamage);
+            Assert.IsNull(claim.DateOfDamage);
         }
 
         [Test]
@@ -79,27 +67,12 @@ namespace ClaimsMapping.Tests
         {
             var atr = new AnnotateTextResponse
             {
-                Entities = new List<Entity>()
-                {
-                    new Entity()
-                    {
-                        Name = "iPhone",
-                        Type = "CONSUMER_GOOD"
-                    },
-                    new Entity()
-                    {
-                        Name = "beach",
-                        Type = "LOCATION"
-                    }
-                },
+                Entities = new List<Entity>(),
                 Tokens = new List<Token>()
                 {
                     new Token()
                     {
-                        Text = new TextSpan()
-                        {
-                            Content = "lost",
-                        },
+                        Lemma = "lose",
                         PartOfSpeech = new PartOfSpeech()
                         {
                             Tag = "VERB"
@@ -109,9 +82,10 @@ namespace ClaimsMapping.Tests
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
-            Assert.AreEqual("iPhone", claim.DamagedItem);
-            Assert.AreEqual("beach", claim.DamageLocation);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
             Assert.AreEqual(Claim.DamageType.Lost, claim.TypeOfDamage);
+            Assert.IsNull(claim.DateOfDamage);
         }
 
         [Test]
@@ -119,27 +93,12 @@ namespace ClaimsMapping.Tests
         {
             var atr = new AnnotateTextResponse
             {
-                Entities = new List<Entity>()
-                {
-                    new Entity()
-                    {
-                        Name = "iPhone",
-                        Type = "CONSUMER_GOOD"
-                    },
-                    new Entity()
-                    {
-                        Name = "beach",
-                        Type = "LOCATION"
-                    }
-                },
+                Entities = new List<Entity>(),
                 Tokens = new List<Token>()
                 {
                     new Token()
                     {
-                        Text = new TextSpan()
-                        {
-                            Content = "stole",
-                        },
+                        Lemma = "steal",
                         PartOfSpeech = new PartOfSpeech()
                         {
                             Tag = "VERB"
@@ -149,9 +108,68 @@ namespace ClaimsMapping.Tests
             };
 
             var claim = new ClaimPopulator().PopulateClaim(atr);
-            Assert.AreEqual("iPhone", claim.DamagedItem);
-            Assert.AreEqual("beach", claim.DamageLocation);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
             Assert.AreEqual(Claim.DamageType.Stolen, claim.TypeOfDamage);
+            Assert.IsNull(claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_Today()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>()
+                {
+                    new Token()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "Today",
+                        },
+                        PartOfSpeech = new PartOfSpeech()
+                        {
+                            Tag = "NOUN"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(DateTime.Today, claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_Yesterday()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>()
+                {
+                    new Token()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "Yesterday",
+                        },
+                        PartOfSpeech = new PartOfSpeech()
+                        {
+                            Tag = "NOUN"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(DateTime.Today.AddDays(-1), claim.DateOfDamage);
         }
     }
 }
