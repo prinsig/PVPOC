@@ -16,18 +16,18 @@
         <br/>
     </div>
 
-    <div class="row" style="background-image: url('../../content/raci/busselton jpg.jpg'); min-height: 350px;">
+    <div class="row statement-container" style="background-image: url('../../content/raci/busselton jpg.jpg'); min-height: 350px;">
 
-        <div class="row">
-            @Html.TextAreaFor(model => model.InputText, new { @class = "required", style = " rows=10, columns=40" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.InputText, new { @class = "required textinput",rows="10",cols="100"})
         </div>
-        <div class="row">
-                <button type="submit" class="button">
-                    <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
-                    <span class="item-text">Make a claim</span>
-                    <span class="item-text-short">Claim</span>
-                </button>
-            </div>
+        <div class="col-md-12">
+            <button type="submit" class="button">
+                <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
+                <span class="item-text">Make a claim</span>
+                <span class="item-text-short">Claim</span>
+            </button>
+        </div>
 
 
         </div>
@@ -35,11 +35,16 @@
 
 <style>
 
+    .statement-container {
+        text-align: center;
+        vertical-align: middle;
+    }
+
     .button {
         font-size: 12px;
         line-height: 1.5;
         margin-bottom: 1px;
-        text-align: center;
+        text-align: left;
         color: #33424d;
         border-color: transparent;
         border-top-right-radius: 0;
@@ -48,5 +53,7 @@
         -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.3);
         box-shadow: 0 2px 5px rgba(0,0,0,.3);
     }
-
+    textarea {
+        max-width: none;
+    }
 </style>
