@@ -5,6 +5,10 @@
 }
 
 @Html.BeginForm("SubmitText","Home")
+
+
+
+
 <div class="row">
         <div>
             <img src="~/Content/raci/RAC-site-logo.png" >
@@ -12,8 +16,37 @@
         <br/>
     </div>
 
-    <div class="row" style="background-image: url('../../content/raci/busselton jpg.jpg')">
+    <div class="row" style="background-image: url('../../content/raci/busselton jpg.jpg'); min-height: 350px;">
 
-        @Html.TextAreaFor(model => model.InputText, new { @class = "required", style = " rows=10, columns=40" })
+        <div class="row">
+            @Html.TextAreaFor(model => model.InputText, new { @class = "required", style = " rows=10, columns=40" })
+        </div>
+        <div class="row">
+                <button type="submit" class="button">
+                    <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
+                    <span class="item-text">Make a claim</span>
+                    <span class="item-text-short">Claim</span>
+                </button>
+            </div>
 
-    </div>
+
+        </div>
+
+
+<style>
+
+    .button {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 1px;
+        text-align: center;
+        color: #33424d;
+        border-color: transparent;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: #ffd100;
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.3);
+        box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+
+</style>
