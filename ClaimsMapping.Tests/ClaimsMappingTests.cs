@@ -210,5 +210,161 @@ namespace ClaimsMapping.Tests
             }
             Assert.AreEqual(comparisonDate, claim.DateOfDamage);
         }
+
+        [Test]
+        public void TestDateMapping_specificWithDashes()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 11-04-2016 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 11), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_specificWithDashesAndSingleDigitDayAndMonthDoubleDigitYear()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 6-4-16 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 6), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_specificWithSlashes()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 11/04/2016 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 11), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_specificWithSlashesAndSingleDigitDayAndMonth()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 6/4/2016 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 6), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_specificWithBackslashes()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 11\\04\\2016 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 11), claim.DateOfDamage);
+        }
+
+        [Test]
+        public void TestDateMapping_specificWithBackslashesAndSingleDigitDayAndMonth()
+        {
+            var atr = new AnnotateTextResponse
+            {
+                Entities = new List<Entity>(),
+                Tokens = new List<Token>(),
+                Sentences = new List<Sentence>()
+                {
+                    new Sentence()
+                    {
+                        Text = new TextSpan()
+                        {
+                            Content = "On 6\\4\\2016 I went to the shops"
+                        }
+                    }
+                }
+            };
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+            Assert.AreEqual(new DateTime(2016, 4, 6), claim.DateOfDamage);
+        }
     }
 }

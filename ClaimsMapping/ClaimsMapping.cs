@@ -60,6 +60,7 @@ namespace ClaimsMapping
         private static void CheckTime(AnnotateTextResponse response, Claim claim)
         {
             CheckForLastDayOfWeek(response, claim);
+            CheckForWellFormattedDate(response, claim);
         }
 
         private static void CheckForLastDayOfWeek(AnnotateTextResponse response, Claim claim)
@@ -81,6 +82,29 @@ namespace ClaimsMapping
                         }
                         claim.DateOfDamage = date;
                     }
+                }
+            }
+        }
+
+        private static void CheckForWellFormattedDate(AnnotateTextResponse response, Claim claim)
+        {
+            Regex lastX = new Regex(@"(\d\d?)[-/\\](\d\d?)[-/\\](\d\d\d?\d?)");
+            foreach (var sentence in response.Sentences)
+            {
+                if (lastX.IsMatch(sentence.Text.Content))
+                {
+                    Match match = lastX.Match(sentence.Text.Content);
+                    var dayStr = Int32.Parse(match.Groups[1].Value);
+                    var monthStr = Int32.Parse(match.Groups[2].Value);
+                    var yearStr = Int32.Parse(match.Groups[3].Value);
+
+                    //16 means 2016 if we're in the 2XXX's...
+                    var yearTruncatedToThousand = (DateTime.Now.Year - (DateTime.Now.Year % 1000));
+                    if(yearStr < yearTruncatedToThousand)
+                    {
+                        yearStr = yearStr + yearTruncatedToThousand;
+                    }
+                    claim.DateOfDamage = new DateTime(yearStr, monthStr, dayStr);
                 }
             }
         }
