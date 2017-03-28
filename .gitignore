@@ -242,3 +242,4 @@ ModelManifest.xml
 .fake/
 *.ncrunchproject
 *.ncrunchsolution
+/GoogleResponse.json
