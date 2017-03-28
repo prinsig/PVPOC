@@ -1,5 +1,7 @@
 ﻿using System.Web.Http;
 using PVpoc.GoogleAPI;
+using ClaimsMapping;
+using Google.Cloud.Language.V1;
 
 namespace PVpoc.Controllers
 {
@@ -12,9 +14,10 @@ namespace PVpoc.Controllers
         //}
 
         [Route("AnnotatedText")]
-        public string GetAnnotatedText(string text)
+        public Claim GetAnnotatedText(string text)
         {
-            return NaturalLanguage.AnalyzeEverything(text).ToString();
+            var claim = new ClaimPopulator();
+            return claim.PopulateClaim(NaturalLanguage.AnalyzeEverything(text));
         }
     }
 }
