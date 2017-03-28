@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Google.Apis.CloudNaturalLanguage.v1.Data;
 
 namespace ClaimsMapping
@@ -12,6 +13,8 @@ namespace ClaimsMapping
             var claim = PopulateClaim(response.Entities);
 
             PopulateFromTokens(response, claim);
+
+            PopulateFromSentences(response, claim);
 
             return claim;
         }
@@ -46,6 +49,39 @@ namespace ClaimsMapping
             foreach (var token in response.Tokens.Where(token => token.PartOfSpeech.Tag == "NOUN"))
             {
                 AnalyseNounForTime(token, claim);
+            }
+        }
+
+        private void PopulateFromSentences(AnnotateTextResponse response, Claim claim)
+        {
+            CheckTime(response, claim);
+        }
+
+        private static void CheckTime(AnnotateTextResponse response, Claim claim)
+        {
+            CheckForLastDayOfWeek(response, claim);
+        }
+
+        private static void CheckForLastDayOfWeek(AnnotateTextResponse response, Claim claim)
+        {
+            Regex lastX = new Regex(@"[lL]ast (\w+day)");
+            foreach (var sentence in response.Sentences)
+            {
+                if (lastX.IsMatch(sentence.Text.Content))
+                {
+                    Match match = lastX.Match(sentence.Text.Content);
+                    var dayStr = match.Groups[1].Value;
+                    DayOfWeek dayOfWeek;
+                    DateTime date = DateTime.Today.AddDays(-1);
+                    if (Enum.TryParse<DayOfWeek>(dayStr, out dayOfWeek))
+                    {
+                        while (dayOfWeek != date.DayOfWeek)
+                        {
+                            date = date.AddDays(-1);
+                        }
+                        claim.DateOfDamage = date;
+                    }
+                }
             }
         }
 
