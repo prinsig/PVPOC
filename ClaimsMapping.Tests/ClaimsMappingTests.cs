@@ -164,6 +164,32 @@ namespace PV.POC.Mapper.Tests
         }
 
         [Test]
+        public void TestDateMapping_LastTuesdayLowerCase()
+        {
+            var atr = new AnnotateTextResponse();
+            atr.Sentences.Add(new Sentence()
+            {
+                Text = new TextSpan()
+                {
+                    Content = "Last tuesday I went to the shops"
+                }
+            });
+
+            var claim = new ClaimPopulator().PopulateClaim(atr);
+            Assert.IsNull(claim.DamagedItem);
+            Assert.IsNull(claim.DamageLocation);
+            Assert.IsNull(claim.TypeOfDamage);
+
+            //Look for last Wednesday
+            var comparisonDate = DateTime.Today.AddDays(-1);
+            while (comparisonDate.DayOfWeek != DayOfWeek.Tuesday)
+            {
+                comparisonDate = comparisonDate.AddDays(-1);
+            }
+            Assert.AreEqual(comparisonDate, claim.DateOfDamage);
+        }
+
+        [Test]
         public void TestDateMapping_specificWithDashes()
         {
             var atr = new AnnotateTextResponse();

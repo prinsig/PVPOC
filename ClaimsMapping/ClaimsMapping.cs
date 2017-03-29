@@ -139,6 +139,11 @@ namespace PV.POC.Mapper
 
             var match = lastX.Match(sentence.Text.Content);
             var dayStr = match.Groups[1].Value;
+            //Ensure string has proper case
+            if (dayStr.Length > 1)
+            {
+                dayStr = dayStr.Substring(0, 1).ToUpper() + dayStr.Substring(1).ToLower();
+            }
             DayOfWeek dayOfWeek;
             var date = DateTime.Today.AddDays(-1);
             if (Enum.TryParse<DayOfWeek>(dayStr, out dayOfWeek))
