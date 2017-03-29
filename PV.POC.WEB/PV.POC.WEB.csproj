@@ -292,11 +292,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClaimsMapping\PV.POC.Mapper.csproj">
+    <ProjectReference Include="..\PV.POC.Mapper\PV.POC.Mapper.csproj">
       <Project>{25f3a06a-ee5d-4f7c-b50e-5c21bcb61a76}</Project>
       <Name>PV.POC.Mapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PVpoc\PV.POC.WEB.API.csproj">
+    <ProjectReference Include="..\PV.POC.WEB.API\PV.POC.WEB.API.csproj">
       <Project>{015b95c2-3f32-4f98-898f-b94b3f06a620}</Project>
       <Name>PV.POC.WEB.API</Name>
     </ProjectReference>
